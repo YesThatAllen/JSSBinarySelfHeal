@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extensionAttribute>
+<displayName>Tail last 20 lines of enrollLog</displayName>
+<description/>
+<dataType>string</dataType>
+<scriptContentsMac>#!/bin/sh&#13;
+&#13;
+# Grab last 20 lines of JAMF.log&#13;
+log=`tail -n 20 /Users/Shared/enrollLog.log`&#13;
+&#13;
+# Results&#13;
+&#13;
+if [[ ! -f "/Users/Shared/enrollLog.log" ]]; then &#13;
+    echo "&lt;result&gt;Cannot locate enrollLog.log on this client&lt;/result&gt;"&#13;
+else&#13;
+    echo "&lt;result&gt;${log}&lt;/result&gt;"&#13;
+fi</scriptContentsMac>
+<scriptContentsWindows/>
+</extensionAttribute>
