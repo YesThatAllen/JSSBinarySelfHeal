@@ -22,7 +22,7 @@ How this works
 Lets open Recon and create a quickadd package.  Save this quickadd package to your desktop.  Before we move on to the next step, please perform the following steps, so we can get the invitation id to update our SelfHeal.sh script:
     a. Use pacifist so we can view the quickadd package contents
     b. expand Resources and extract the postinstall file
-    c. Open the postinstall file with TextWrangler
+    c. Open the postinstall file with TextWrangler or any text editor we prefer 
     d. Search for this line: $jamfCLIPath enroll -invitation and copy the number string after -invitation.  This is our invitation id that we will input into our SelfHeal.sh as the following variable: enrollInv=""
     e. Save changes to the SelfHeal.sh
 
@@ -96,7 +96,7 @@ We now have a SelfHeal solution in place that will help keep our clients communi
 
 /Users/Shared/enrollLog.log
 
-This log is set to rollover once it reaches/exceeds 10MB.  The log will be archived in /Users/Shared/log_archive.  The Self Heal is going to archive 5 logs.  Once it reaches 5, the oldest 3 logs will be deleted keeping the 2 newest archive logs on the client.
+This log is set to rollover once it reaches/exceeds 10MB.  The log will be archived in /Users/Shared/log_archive.  The Self Heal is going to archive 5 logs.  Once it reaches 5, the oldest 4 logs will be deleted keeping the newest archive log on the client.
 
 If we wish to have transparency of the log from the JSS, we can download enrollLog.xml and upload it to the JSS.
 
