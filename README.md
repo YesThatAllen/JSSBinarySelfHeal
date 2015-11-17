@@ -65,9 +65,9 @@ We will also need to create an additional policy that our Self Heal will verify 
 5. Type in a display name for this script; something like SelfHeal
 6. Click on the "Script" payload
 7. Create a script that looks like this: 
-    a. #!/bin/sh
+8.  #!/bin/sh
 
-       echo "heal"
+    echo "heal"
 8. Save this script
 9. Click "Computers"
 10. Click "Policies"
