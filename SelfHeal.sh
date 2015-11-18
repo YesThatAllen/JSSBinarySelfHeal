@@ -42,7 +42,7 @@ logFile="/Users/Shared/enrollLog.log"
 check=`/usr/local/bin/jamf checkJSSConnection | grep "The JSS is available"`
 quickLocation="/tmp/quickadd.zip"
 log=`/usr/local/bin/jamf log`
-policy=`/usr/local/bin//jamf policy -event heal`
+policy=`/usr/local/bin/jamf policy -event heal`
 mdmEnrollmentProfileID="00000000-0000-0000-A000-4A414D460003"
 enrolled=`/usr/bin/profiles -P | /usr/bin/grep "$mdmEnrollmentProfileID"`
 
