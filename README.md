@@ -6,7 +6,7 @@ What do we do when computers stop communicating with the JSS?  The computer is i
 
 How this works
 
-1. Uses a launch daemon that runs on a scheduled time each day that runs a script to perform a series of steps to verify that the computer is managed.
+1. Uses a launch daemon that runs on a scheduled time each day that runs a script to perform a series of steps to verify that the computer is managed.  I have just added a radom delay of ten minutes to the launch daemon.  I do have a policy that is being executed in the self heal, and I wanted to eliminate all managed clients from running a policy at the same time(LCV 11-19-15).
 2. The script that is ran is performing the following taks:
     a. Does this computer have the JAMF binary
     b. Can this computer check the JSS connection
