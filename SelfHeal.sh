@@ -18,20 +18,22 @@
 #
 #####################################################################################################
 #
-#       	This script is designed to perform a self heal on the client.  If the client does not have
-#		    the JAMF Binary, a quickadd package is downloaded and installed.  If the client cannot
-#		    check in with the JSS, run a policy, or cannot log it's IP address, the client
-#		    will be enrolled via invitation.  If the MDM profile is not found on the device, the client
-#       	will get re-enrolled into MDM.  There is a log file that is created to work with the Self Heal
-#			process.  The log is located in /Users/Shared/ and is called enrollLog.log.  Five archives are
-#			created of this log and stored in /Users/Shared/log_archive.  Once five logs rollover and are 
-#			archived, the oldest four logs are deleted and the most recent archive is kept.
+#       This script is designed to perform a self heal on the client.  If the client does not have
+#	the JAMF Binary, a quickadd package is downloaded and installed.  If the client cannot
+#	check in with the JSS, run a policy, or cannot log it's IP address, the client
+#	will be enrolled via invitation.  If the MDM profile is not found on the device, the client
+#       will get re-enrolled into MDM.  There is a log file that is created to work with the Self Heal
+#	process.  The log is located in /Users/Shared/ and is called enrollLog.log.  Five archives are
+#	created of this log and stored in /Users/Shared/log_archive.  Once five logs rollover and are 
+#	archived, the oldest four logs are deleted and the most recent archive is kept.
 #
-#		    This process will work on a 9.8+ JSS.  It will not work on any JSS version pre 9.8.
+#	This process will work on a 9.8+ JSS.  It will not work on any JSS version pre 9.8.
 #
 #####################################################################################################
 #
-#       version 1.0 by Lucas Vance
+#       version 2.0 by Lucas Vance
+#	Added log rotation, log archiving and log clean up LCV 11-23-15
+#	Add changes to the variables for more consitent Self Heal checks LCV 11-23-15
 #
 #####################################################################################################
 
@@ -39,10 +41,10 @@
 jssUrl="" # ex. https://jamit.q.jamfsw.corp:8443 - Please include the port if used
 enrollInv="" # Invitation ID from a quickadd package
 logFile="/Users/Shared/enrollLog.log"
-check=`/usr/local/bin/jamf checkJSSConnection | grep "The JSS is available"`
+check=`/usr/local/bin/jamf checkJSSConnection | rev | cut -c 2- | rev | grep "The JSS is avaialable"
 quickLocation="/tmp/quickadd.zip"
-log=`/usr/local/bin/jamf log`
-policy=`/usr/local/bin/jamf policy -event heal`
+log=`/usr/local/bin/jamf log | rev | cut -c 5- | rev`
+policy=`/usr/local/bin/jamf policy -event heal | grep "Script result: heal" | cut -d " " -f3`
 mdmEnrollmentProfileID="00000000-0000-0000-A000-4A414D460003"
 enrolled=`/usr/bin/profiles -P | /usr/bin/grep "$mdmEnrollmentProfileID"`
 
@@ -112,21 +114,21 @@ if [[ ! -f /usr/local/jamf/bin/jamf ]];
 fi
 
 # Check to see if the client to check in with the JSS, if not, enroll the client
-if [[ ${check} =~ "The JSS is available" ]];
+if [[ ${check} == "The JSS is available" ]];
 	then echo "Client can successfully check in with the JSS" | addDate >> $logFile;
 	else jamf createConf -k -url $jssUrl | addDate >> $logFile;
 	/usr/local/bin/jamf enroll -invitation $enrollInv | addDate >> $logFile;
 fi
 
 # Can the client log it's IP address with the JSS, if not, enroll the client
-if [[ ${log} =~ "Logging to $jssUrl/..." ]];
+if [[ ${log} == "Logging to $jssUrl" ]];
 	then echo "Client can log IP address with JSS" | addDate >> $logFile
 	else jamf createConf -k -url $jssUrl | addDate >> $logFile;
 	/usr/local/bin/jamf enroll -invitation $enrollInv | addDate >> $logFile;
 fi
 
 # Can the client execute a policy, if not, enroll the client
-if [[ ${policy} =~ "heal" ]];
+if [[ ${policy} == "heal" ]];
 	then echo "Client can execute policies at this time" | addDate >> $logFile;
 	else jamf createConf -k -url $jssUrl | addDate >> $logFile;
 	/usr/local/bin/jamf enroll -invitation $enrollInv | addDate >> $logFile;
