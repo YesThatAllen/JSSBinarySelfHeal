@@ -13,7 +13,10 @@ Added a random delay to the LaunchDaemon
 Modified the if statements to no longer use a like variable.
 
     example of this change is below:
+    Previous:
+    if [[ ${check} =~ "The JSS is available" ]]
     
+    Now:
     if [[ ${check} == "The JSS is available" ]]
     
 I modified my variables to use grep and cut to extract what I would expect to see in terminal running a command using the JAMF binary.  I then was able to use "==" to match my variable to the expected command output.
