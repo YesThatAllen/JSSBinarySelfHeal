@@ -1,5 +1,5 @@
 ********** UPDATES **********
-Date 12-24-15
+Date 11-24-15
 
 Log Rotation added
     Once logs reach 10MB they will be compressed and placed in /Users/Shared/log_archive
@@ -21,3 +21,7 @@ Modified the if statements to no longer use a like variable.
     
 I modified my variables to use grep and cut to extract what I would expect to see in terminal running a command using the JAMF binary.  I then was able to use "==" to match my variable to the expected command output.
 
+********** UPDATES **********
+Date 11-30-15
+
+Modified launch daemon to run as root
