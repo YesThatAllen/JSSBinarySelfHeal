@@ -20,5 +20,7 @@
 		<key>Minute</key>
 		<integer>0</integer>
 	</dict>
+	<key>UserName</key>
+	<string>root</string>
 </dict>
 </plist>
