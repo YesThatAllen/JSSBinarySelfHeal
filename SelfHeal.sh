@@ -41,7 +41,7 @@
 jssUrl="" # ex. https://jamit.q.jamfsw.corp:8443 - Please include the port if used
 enrollInv="" # Invitation ID from a quickadd package
 logFile="/Users/Shared/enrollLog.log"
-check=`/usr/local/bin/jamf checkJSSConnection | rev | cut -c 2- | rev | grep "The JSS is avaialable"`
+check=`/usr/local/bin/jamf checkJSSConnection | rev | cut -c 2- | rev | grep "The JSS is available"`
 quickLocation="/tmp/quickadd.zip"
 log=`/usr/local/bin/jamf log | rev | cut -c 5- | rev`
 policy=`/usr/local/bin/jamf policy -event heal | grep "Script result: heal" | cut -d " " -f3`
