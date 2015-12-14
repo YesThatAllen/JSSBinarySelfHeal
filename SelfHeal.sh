@@ -33,7 +33,7 @@
 #
 #       version 2.0 by Lucas Vance
 #	Added log rotation, log archiving and log clean up LCV 11-23-15
-#	Add changes to the variables for more consitent Self Heal checks LCV 11-23-15
+#	Modified variables for more consitent Self Heal checks LCV 11-23-15
 #
 #####################################################################################################
 
