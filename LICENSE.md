@@ -1,4 +1,4 @@
-Copyright (C) 2014, JAMF Software, LLC All rights reserved.
+Copyright (C) 2016, JAMF Software, LLC All rights reserved.
 
 SUPPORT FOR THIS PROGRAM
 
