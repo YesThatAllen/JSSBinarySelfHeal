@@ -46,8 +46,8 @@ Lets open Composer and perform the following tasks please:
 5. Type in administrator password when prompted
 6. Right click on “Dashboard” under “Sources” and rename this package to SelfHeal
 7. On the right pane, right click on the “Users” folder and delete it
-8. Navigate to /Library/LaunchDaemons/ and drag "com.managementcheck.it.plist" into the right pane of Composer
-9. Expand all of the folders until we see “com.managementcheck.it.plist" and click on it.  Change the owner of this file to "ROOT" and the group to "WHEEL"
+8. Navigate to /Library/LaunchDaemons/ and drag "com.management.selfheal.plist" into the right pane of Composer
+9. Expand all of the folders until we see “com.management.selfheal.plist" and click on it.  Change the owner of this file to "ROOT" and the group to "WHEEL"
 10. Leave the permissions at the default
 11. Navigate to /Library/Scripts/ and drag “SelfHeal.sh" into the right pane of Composer
 12. Expand all of the folders until wee “SelfHeal.sh” and click on it.  Change the owner of this file to “ROOT” and the group to “WHEEL"
@@ -89,7 +89,7 @@ We can now create a policy to push out our DMG to end users.  Our policy should 
 2. Add our DMG from above to install our LaunchDaemon and Script on the client
 3. Click on the “Files and Process” payload and click edit
 4. Scroll all the way down on the right pane and type the following under “Execute Command"
-    a. launchctl load /Library/LaunchDaemons/com.managementcheck.it.plist
+    a. launchctl load /Library/LaunchDaemons/com.management.selfheal.plist
 5. Scope the policy to our end users
 
 We now have a SelfHeal solution in place that will help keep our clients communicating with the JSS. The script that we designed will go through a serious of checks, if any of the checks fail, a patch is performed and the script exits.  There is logging for this process that can be found on the client at the following location:
